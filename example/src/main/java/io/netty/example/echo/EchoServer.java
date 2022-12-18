@@ -30,7 +30,9 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 
 /**
+ * Rabbit-启动
  * Echoes back any received data from a client.
+ * https://blog.51cto.com/u_15127674/4748316
  */
 public final class EchoServer {
 
@@ -39,7 +41,8 @@ public final class EchoServer {
     public static void main(String[] args) throws Exception {
         // Configure SSL.
         final SslContext sslCtx = ServerUtil.buildSslContext();
-
+        //  eventLoopGroup相当于一个线程池，而每个eventLoop相当于单个线程，
+        //  每个线程对应一个selector，可以绑定多个channel
         // Configure the server.
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();

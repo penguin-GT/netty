@@ -270,6 +270,8 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
 
     private ChannelFuture doBind(final SocketAddress localAddress) {
         final ChannelFuture regFuture = initAndRegister();
+        //initAndRegister
+        //1.创建一个ServerSocketChannel,2.初始化，3.注册到NioEventLoopGroup中的selector
         final Channel channel = regFuture.channel();
         if (regFuture.cause() != null) {
             return regFuture;
