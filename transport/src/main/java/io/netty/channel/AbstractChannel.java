@@ -475,7 +475,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
             }
 
             AbstractChannel.this.eventLoop = eventLoop;
-
+            //当前线程是否是nioEventLoop中的线程
             if (eventLoop.inEventLoop()) {
                 register0(promise);
             } else {
@@ -878,7 +878,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
                 }
                 return;
             }
-
+//将数据写到buffer中
             outboundBuffer.addMessage(msg, size, promise);
         }
 
