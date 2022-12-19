@@ -94,3 +94,6 @@ write 代表将数据状态快递站，flush包含装车与发车
 关闭服务
 ![img_13.png](img_13.png)
 ![img_14.png](img_14.png)
+
+netty易错点
+![img_15.png](img_15.png)
