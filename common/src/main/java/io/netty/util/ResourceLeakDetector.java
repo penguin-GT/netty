@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import static io.netty.util.internal.StringUtil.EMPTY_STRING;
 import static io.netty.util.internal.StringUtil.NEWLINE;
 import static io.netty.util.internal.StringUtil.simpleClassName;
-
+//内存泄露监测
 public class ResourceLeakDetector<T> {
 
     private static final String PROP_LEVEL_OLD = "io.netty.leakDetectionLevel";
@@ -71,11 +71,13 @@ public class ResourceLeakDetector<T> {
         /**
          * Enables advanced sampling resource leak detection which reports where the leaked object was accessed
          * recently at the cost of high overhead.
+         * 记录部分泄露的地方
          */
         ADVANCED,
         /**
          * Enables paranoid resource leak detection which reports where the leaked object was accessed recently,
          * at the cost of the highest possible overhead (for testing purposes only).
+         *
          */
         PARANOID;
 
@@ -84,6 +86,7 @@ public class ResourceLeakDetector<T> {
          *
          * @param levelStr - level string : DISABLED, SIMPLE, ADVANCED, PARANOID. Ignores case.
          * @return corresponding level or SIMPLE level in case of no match.
+         * 记录所有泄露的地方
          */
         static Level parseLevel(String levelStr) {
             String trimmedLevelStr = levelStr.trim();
@@ -260,6 +263,7 @@ public class ResourceLeakDetector<T> {
             return null;
         }
         reportLeak();
+        //创建一个弱引用对象
         return new DefaultResourceLeak(obj, refQueue, allLeaks, getInitialHint(resourceType));
     }
 
@@ -283,7 +287,7 @@ public class ResourceLeakDetector<T> {
         return logger.isErrorEnabled();
     }
 
-    private void reportLeak() {
+    private void  reportLeak() {
         if (!needReport()) {
             clearRefQueue();
             return;
@@ -296,6 +300,8 @@ public class ResourceLeakDetector<T> {
                 break;
             }
 
+            //判断有没有泄露的关键，当 private final Set<DefaultResourceLeak<?>> allLeaks;  引用计数表为0的时候，就会
+            //从这个队列中移除弱引用对象，当此队列里面没有对象时，说明所有对象皆以回收，没有内存溢出。
             if (!ref.dispose()) {
                 continue;
             }
