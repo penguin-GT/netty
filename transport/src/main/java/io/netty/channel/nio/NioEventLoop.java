@@ -500,6 +500,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
         }
     }
 
+    //死循环处理连接
     @Override
     protected void run() {
         int selectCnt = 0;

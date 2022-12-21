@@ -65,5 +65,51 @@ are listed below:
 
 Automatic modules do not provide any means to declare dependencies, so you need to list each used module separately
 in your `module-info` file.
+
+##构建连接
+
 ![img.png](img.png)
 ![img_1.png](img_1.png)
+
+##读数据
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+![img_4.png](img_4.png)
+
+##业务处理
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+
+##发数据
+write 代表将数据状态快递站，flush包含装车与发车
+![img_8.png](img_8.png)
+![img_9.png](img_9.png)
+![img_10.png](img_10.png)
+
+##断开连接
+![img_11.png](img_11.png)
+![img_12.png](img_12.png)
+
+##关闭服务
+![img_13.png](img_13.png)
+![img_14.png](img_14.png)
+
+##netty易错点
+![img_15.png](img_15.png)
+
+## 参数调优
+![img_16.png](img_16.png)
+![img_17.png](img_17.png)
+![img_18.png](img_18.png)
+![img_19.png](img_19.png)
+
+## 内存泄漏检测
+![img_20.png](img_20.png)
+
+## 性能优化
+1.io密集型操作，将业务线程池，独立出去
+2.writeAndFlush，拆开，多次write，1次flush，rt变长，吞吐量变高
+
+## 流量监控
+![img_21.png](img_21.png)
